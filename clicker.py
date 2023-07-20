@@ -11,6 +11,7 @@ def main():
     start = False
     initial_text = "None"
     window_title = "Autoclicker v0.1"
+    pressedKey = None
     sg.theme('DarkAmber')
     layout = [
         [
