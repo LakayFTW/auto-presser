@@ -4,22 +4,7 @@ import PySimpleGUI as sg
 initial_text = "None"
 window_title = "Autoclicker v0.1"
 
-# left_column = [
-
-# ]
-
-# right_column = [
-#     [
-#         sg.Button("CLOSE", border_width=0),
-#     ]
-# ]
-
 layout = [
-    # [
-    #     # sg.Column(left_column),
-    #     # sg.VSeperator(),
-    #     # sg.Column(right_column),
-    # ]
     [
         sg.Button("Detect Keypress", border_width=0), sg.Text(initial_text, key='buttonPressed', size=30),
     ],
@@ -30,15 +15,9 @@ layout = [
         sg.Button("Start", border_width=0), sg.Button("Stop", border_width=0), sg.Button("CLOSE", border_width=0)
     ]
 ]
-
 sg.theme('DarkAmber')
 
 window = sg.Window(window_title, layout, size=(200, 200))
-
-# while True:
-#     event, values = window.read()
-#         break
-#     break
 
 while True:
     event, values = window.read()
