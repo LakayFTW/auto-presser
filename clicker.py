@@ -11,6 +11,7 @@ def main():
     start = False
     initial_text = "None"
     window_title = "Autoclicker v0.1"
+    sg.theme('DarkAmber')
     layout = [
         [
             sg.Button("Detect Keypress", border_width=0), sg.Text(initial_text, key='buttonPressed', size=30),
@@ -23,7 +24,6 @@ def main():
         ]
     ]
 
-    sg.theme('DarkAmber')
     window = sg.Window(window_title, layout, size=(200, 200))
 
     while True:
@@ -32,7 +32,7 @@ def main():
             break
         if event == "Detect Keypress":
             pressedKey = keyboard.read_key()
-            window['buttonPressed'].update(pressedKey)
+            window['buttonPressed'].update(pressedKey.upper())
         if event == "Start":
             if pressedKey == None:
                 continue
