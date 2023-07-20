@@ -33,14 +33,14 @@ def main():
         if event == "Detect Keypress":
             pressedKey = keyboard.read_key()
             window['buttonPressed'].update(pressedKey)
-        if event == "Start" or keyboard.is_pressed('shift+space'):
+        if event == "Start":
             if pressedKey == None:
                 continue
             start = True
             # keyboard.write(f'{pressedKey}', delay=0.01)
             thread = Thread(target=write_key, args=(pressedKey))
             thread.start()
-        if event == "Stop" or keyboard.is_pressed('shift+a'):
+        if event == "Stop":
             start = False
             thread.join()
             continue
