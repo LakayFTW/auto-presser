@@ -16,3 +16,13 @@ __Use this with caution!.__
   - `pip install -r requirements.txt`
 - Run clicker.py
   - `python clicker.py`
+
+## Building your own .exe
+If you made changes to the code you can build your own .exe very easily.
+1. Install pyinstaller
+   - `pip install pyinstaller`
+2. Use pyinstaller
+   - `pyinstaller clicker.py --onefile -w`
+   - --onefile: provides just a single .exe file
+   - -w removes the cli
+   - If you dont want a single cli and need all the other files, just remove it from the command.

@@ -9,7 +9,7 @@ def write_key(key, stop_event):
 def main():
     stop_event = Event()
     initial_text = "None"
-    window_title = "Autoclicker v0.1"
+    window_title = "Autopresser v0.2"
     pressedKey = None
     sg.theme('DarkAmber')
     layout = [
