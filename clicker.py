@@ -1,14 +1,13 @@
 import keyboard
 import PySimpleGUI as sg
-from threading import Thread
+from threading import Thread, Event
 
-def write_key(key):
-    while start:
+def write_key(key, stop_event):
+    while not stop_event.is_set():
         keyboard.write(f'{key}', delay=0.01)
 
 def main():
-    global start
-    start = False
+    stop_event = Event()
     initial_text = "None"
     window_title = "Autoclicker v0.1"
     pressedKey = None
@@ -27,27 +26,33 @@ def main():
 
     window = sg.Window(window_title, layout, size=(200, 200))
 
-    while True:
-        event, values = window.read()
-        if event == "CLOSE" or event == sg.WIN_CLOSED:
-            break
-        if event == "Detect Keypress":
-            pressedKey = keyboard.read_key()
-            window['buttonPressed'].update(pressedKey.upper())
-        if event == "Start":
-            if pressedKey == None:
-                continue
-            start = True
-            # keyboard.write(f'{pressedKey}', delay=0.01)
-            thread = Thread(target=write_key, args=(pressedKey))
-            thread.start()
-        if event == "Stop":
-            start = False
+    thread = None
+
+    try:
+        while True:
+            event, values = window.read()
+            if event == "CLOSE" or event == sg.WIN_CLOSED:
+                break
+            if event == "Detect Keypress":
+                pressedKey = keyboard.read_key()
+                window['buttonPressed'].update(pressedKey.upper())
+            if event == "Start":
+                if pressedKey == None:
+                    continue
+                stop_event.clear()
+                thread = Thread(target=write_key, args=(pressedKey, stop_event))
+                thread.start()
+            if event == "Stop":
+                stop_event.set()
+                thread.join()
+                thread = None
+
+        window.close()
+    finally:
+        if thread is not None:
+            stop_event.set()
             thread.join()
-            continue
+        window.close()
 
-    window.close()
-
-t1 = Thread(target=main)
-t1.start()
-t1.join()
+if __name__ == "__main__":
+    main()

@@ -6,12 +6,13 @@ __Use this with caution!.__
 - Timer setting will eventually be added
 
 ## Setup
-- Make Sure Python is installed
+- Make sure Python is installed
+- Make sure pip is installed
 - Create a venv
   - `python -m venv venv`
 - Activate your venv
   - `.\venv\Scripts\Activate.ps1` (powershell)
 - Install requirements
-  - `python -m install -r requirements.txt`
+  - `pip install -r requirements.txt`
 - Run clicker.py
   - `python clicker.py`
